@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Spring Boot entry point <br>
  * 
- * @author Telosys
+ * @author ${AUTHOR}
  *
  */
 @SpringBootApplication
