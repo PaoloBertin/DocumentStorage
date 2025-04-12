@@ -7,11 +7,8 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 
-
-import java.io.Serializable;
-
 /**
- * JPA entity class for "Document"
+ * JPA entity Document
  *
  * @author Paolo Bertin
  *
@@ -22,6 +19,7 @@ import java.io.Serializable;
 @Entity
 public class Document implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
