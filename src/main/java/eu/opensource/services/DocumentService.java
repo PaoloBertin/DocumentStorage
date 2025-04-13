@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import eu.opensource.model.Document;
 
 /**
- * Service for entity "Document" <br>
+ * Service for entity "Document"
  * 
- * This service provides all the necessary operations required by the REST controller <br>
+ * This service provides all the necessary operations required by the REST controller
  * 
  * @author Paolo Bertin
  *

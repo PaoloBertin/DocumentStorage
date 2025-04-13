@@ -1,4 +1,4 @@
-package ${target.javaPackageFromFolder(${SRC})};
+package ${ROOT_PKG}.services;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;
