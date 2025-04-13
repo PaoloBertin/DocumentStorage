@@ -1,6 +1,5 @@
 package ${ROOT_PKG}.services;
 
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,9 +15,9 @@ import ${ROOT_PKG}.model.${entity.name};
  */
 public interface ${entity.name}Service {
 
-	Optional<${entity.name}> get${entity.name}ById(Long id);
+	${entity.name} get${entity.name}ById(Long id);
 
-    Page<${entity.name}> getAll${entity.name}s(Pageable pageable);
+    Page<${entity.name}> getAll${entity.name}(Pageable pageable);
        
     ${entity.name} save${entity.name}(${entity.name} $fn.uncapitalize($entity.name));
 

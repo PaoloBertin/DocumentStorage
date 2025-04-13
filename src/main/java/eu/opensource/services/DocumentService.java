@@ -1,6 +1,5 @@
 package eu.opensource.services;
 
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,9 +15,9 @@ import eu.opensource.model.Document;
  */
 public interface DocumentService {
 
-	Optional<Document> getDocumentById(Long id);
+	Document getDocumentById(Long id);
 
-    Page<Document> getAllDocuments(Pageable pageable);
+    Page<Document> getAllDocument(Pageable pageable);
        
     Document saveDocument(Document document);
 

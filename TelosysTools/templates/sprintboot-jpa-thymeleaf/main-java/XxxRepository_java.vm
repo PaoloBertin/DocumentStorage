@@ -1,45 +1,27 @@
-#parse("include/init_var_entity.vm")
-#parse("include/java_header.vm")
 package ${target.javaPackageFromFolder(${SRC})};
-##---------------------------------------------------------------------------------------
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
-import ${ROOT_PKG}.model.${jpaEntityClass};
-#if ( $entity.hasCompositePrimaryKey() )
-import ${ROOT_PKG}.entities.${jpaEntityIdClass};
-#else
-#foreach( $import in $java.imports($entity.keyAttributes) )
-import $import;
-#end
-#end
+import ${ROOT_PKG}.model.${entity.name};
 
 /**
- * Spring Data JPA repository for entity "${jpaEntityClass}" <br> 
+ * Spring Data JPA repository for entity "${entity.name}" 
  * 
  * @author ${AUTHOR}
  *
  */
-public interface ${jpaEntityClass}Repository extends PagingAndSortingRepository<${jpaEntityClass}, ${jpaEntityIdClass}> {
+@Repository 
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, Long> {
 
-    //List<${jpaEntityClass}> findByXxx(String xxx);
 #foreach( $attribute in $entity.nonKeyAttributes )
-## $jpa.fieldAnnotations(4, $attribute)
-    Page<${jpaEntityClass}> findBy$fn.capitalize(${attribute.name})(${attribute.type} ${attribute.name}, Pageable pageable);
+    Page<${entity.name}> findBy$fn.capitalize(${attribute.name})(${attribute.type} ${attribute.name}, Pageable pageable);
 
 #end
-
-
-
-	//List<${jpaEntityClass}> findByXxxStartingWith(String xxx);
-
-	//List<${jpaEntityClass}> findByXxxContaining(String xxx);
-
-	//List<${jpaEntityClass}> findByYyy(BigDecimal yyy);
-
-	//List<${jpaEntityClass}> findByXxxContainingAndYyy(String xxx, BigDecimal yyy);
-
+##	List<${entity.name}> findByXxxStartingWith(String xxx);
+##	List<${entity.name}> findByXxxContaining(String xxx);
+##	List<${entity.name}> findByYyy(BigDecimal yyy);
+##	List<${entity.name}> findByXxxContainingAndYyy(String xxx, BigDecimal yyy);
 }

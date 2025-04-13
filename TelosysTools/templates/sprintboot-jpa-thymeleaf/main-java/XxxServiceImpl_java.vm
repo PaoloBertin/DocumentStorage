@@ -1,10 +1,9 @@
 package ${ROOT_PKG}.services.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,42 @@ import ${ROOT_PKG}.services.${entity.name}Service;
 @Service("$fn.uncapitalize(${entity.name})Service")
 public class ${entity.name}ServiceImpl implements ${entity.name}Service {
 
-	private final ${entity.name}Repository  ${entity.name}Repository;
-	
+	private final ${entity.name}Repository  ${fn.uncapitalize(${entity.name})}Repository;
 
+	@Override
+	public ${entity.name} get${entity.name}ById(Long id) {
+
+		log.info("Fetching ${entity.name} with id: {}", id);
+
+		return  ${fn.uncapitalize(${entity.name})}Repository.findById(id).map(entity -> {
+					log.info("Found ${entity.name}: {}", entity);
+					return entity;
+				})
+				.orElseThrow(() -> new RuntimeException("Entity not found with id: " + id));
+	}
+
+	@Override
+    public Page<${entity.name}> getAll${entity.name}(Pageable pageable){
+
+		log.info("Fetching all ${entity.name}s");
+	
+        return ${fn.uncapitalize(${entity.name})}Repository.findAll(pageable);
+	}
+
+	@Override
+    public ${entity.name} save${entity.name}(${entity.name} $fn.uncapitalize($entity.name)){
+
+		log.info("Saving ${entity.name}: {}", $fn.uncapitalize($entity.name));
+
+		return ${fn.uncapitalize(${entity.name})}Repository.save(${fn.uncapitalize($entity.name)});
+	}
+
+	@Override
+    public void deleteById(Long id) {
+
+		log.info("Deleting ${entity.name} with id: {}", id);
+
+		${fn.uncapitalize(${entity.name})}Repository.deleteById(id);
+		
+	}
 }
