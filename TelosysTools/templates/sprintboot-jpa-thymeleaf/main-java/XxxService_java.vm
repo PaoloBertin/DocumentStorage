@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import ${ROOT_PKG}.model.${entity.name};
 
 /**
- * Service for entity "${entity.name}" <br>
+ * Service for entity "${entity.name}"
  * 
- * This service provides all the necessary operations required by the REST controller <br>
+ * This service provides all the necessary operations required by the REST controller
  * 
  * @author ${AUTHOR}
  *
