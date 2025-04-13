@@ -1,0 +1,45 @@
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder(${SRC})};
+##---------------------------------------------------------------------------------------
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
+import ${ROOT_PKG}.model.${jpaEntityClass};
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ROOT_PKG}.entities.${jpaEntityIdClass};
+#else
+#foreach( $import in $java.imports($entity.keyAttributes) )
+import $import;
+#end
+#end
+
+/**
+ * Spring Data JPA repository for entity "${jpaEntityClass}" <br> 
+ * 
+ * @author ${AUTHOR}
+ *
+ */
+public interface ${jpaEntityClass}Repository extends PagingAndSortingRepository<${jpaEntityClass}, ${jpaEntityIdClass}> {
+
+    //List<${jpaEntityClass}> findByXxx(String xxx);
+#foreach( $attribute in $entity.nonKeyAttributes )
+## $jpa.fieldAnnotations(4, $attribute)
+    Page<${jpaEntityClass}> findBy$fn.capitalize(${attribute.name})(${attribute.type} ${attribute.name}, Pageable pageable);
+
+#end
+
+
+
+	//List<${jpaEntityClass}> findByXxxStartingWith(String xxx);
+
+	//List<${jpaEntityClass}> findByXxxContaining(String xxx);
+
+	//List<${jpaEntityClass}> findByYyy(BigDecimal yyy);
+
+	//List<${jpaEntityClass}> findByXxxContainingAndYyy(String xxx, BigDecimal yyy);
+
+}
