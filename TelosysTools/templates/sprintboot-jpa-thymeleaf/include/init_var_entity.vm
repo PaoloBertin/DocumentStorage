@@ -1,5 +1,5 @@
-##
 #set($jpaEntityClass    = "${entity.name}" )
+#set($element           = "${fn.uncapitalize(${entity.name})}" )
 
 #if ( $entity.hasCompositePrimaryKey() )
 #set($jpaEntityIdClass  = "${entity.name}Id" )

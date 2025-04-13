@@ -27,13 +27,15 @@ public class Document implements Serializable {
     private Long id;
 
     private String     summary ;
-
+    
     private String     filename ;
-
+    
     private String     author ;
-
+    
     private String     speaker ;
-
+    
     private Integer    documentyear ;
+    
+    private byte[]     content;
 
 }

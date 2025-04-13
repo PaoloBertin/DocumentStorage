@@ -27,8 +27,13 @@ public class ${entity.name} implements Serializable {
     private Long id;
 
 #foreach( $attribute in $entity.nonKeyAttributes )
-    private $attribute.formattedType(10) $attribute.name #if($attribute.hasInitialValue())= ${attribute.ini} #end;
+#if($attribute.hasTag("array"))
+    private byte[]     $attribute.name;
 
+#else
+    private $attribute.formattedType(10) $attribute.name #if($attribute.hasInitialValue())= ${attribute.ini} #end;
+    
+#end
 #end
 #foreach( $link in $entity.links )
     private ${link.formattedFieldType(10)} $link.fieldName ;

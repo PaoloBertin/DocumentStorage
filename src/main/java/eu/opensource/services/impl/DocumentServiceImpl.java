@@ -1,6 +1,8 @@
+
+
+
 package eu.opensource.services.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -30,15 +32,9 @@ public class DocumentServiceImpl implements DocumentService {
 	private final DocumentRepository  documentRepository;
 
 	@Override
-	public Document getDocumentById(Long id) {
+	public Optional<Document> getDocumentById(Long id) {
 
-		log.info("Fetching Document with id: {}", id);
-
-		return  documentRepository.findById(id).map(entity -> {
-					log.info("Found Document: {}", entity);
-					return entity;
-				})
-				.orElseThrow(() -> new RuntimeException("Entity not found with id: " + id));
+		return  documentRepository.findById(id);
 	}
 
 	@Override

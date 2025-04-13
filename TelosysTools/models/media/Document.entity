@@ -1,3 +1,5 @@
+#set( $attributo = "pubblic byte[] content;" )
+
 
 Document {
  
@@ -5,15 +7,14 @@ Document {
 
     summary : string;
 
-    // @Enumerated(EnumType.STRING)
-    // @Column(nullable = false)
-    // private Category category;
-
     filename : string;
      
     author : string;
 
     speaker : string;
 
-    documentyear : int;   
+    documentyear : int;
+
+    content : byte {#array};
+
 }

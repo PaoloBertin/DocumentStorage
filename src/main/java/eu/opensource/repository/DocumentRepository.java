@@ -26,4 +26,6 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
 
     Page<Document> findByDocumentyear(Integer documentyear, Pageable pageable);
 
+    Page<Document> findByContent(Byte content, Pageable pageable);
+
 }
