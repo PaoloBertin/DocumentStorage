@@ -57,7 +57,7 @@ public class ${entity.name}Controller {
      * @return nome vista
      */
     @GetMapping("/all")
-    public String viewAll${entity.name}(@RequestParam(name = "page", defaultValue = "0") int page,
+    public String list{entity.name}(@RequestParam(name = "page", defaultValue = "0") int page,
                                    		@RequestParam(name = "size", defaultValue = "10") int size,
                                    		Model uiModel) {
 
@@ -82,16 +82,46 @@ public class ${entity.name}Controller {
      * @return nome vista
      */
     @GetMapping(value = "/{id}")
-    public String view${entity.name}(@PathVariable("id") Long id, Model uiModel) {
+    public String show${entity.name}(@PathVariable("id") Long id, Model uiModel) {
 
-        Optional<${entity.name}> ${element} = ${element}Service.getDocumentById(id);
+        Optional<${entity.name}> ${element} = ${element}Service.get${entity.name}ById(id);
 
         if (${element}.isPresent()) {
-            uiModel.addAttribute("document", document.get());
-            return "document/show";
+            uiModel.addAttribute("${element}", ${element}.get());
+            return "${element}/show${entity.name}";
         } else {
-            return "document/error";
+            return "${element}/error";
         }
+    }
+
+    /**
+     * Recupera un elemento e rimanda al form per l'aggiornamento
+     *
+     * @return pagina edit
+     */
+    @GetMapping(value = "/{id}", params = "form")
+    public String updateForm${entity.name}(@PathVariable("id") Long id,
+                                           @RequestParam(required = true) String form,
+                                           Model uiModel) {
+
+        Optional<${entity.name}> ${element} = ${element}Service.get${element}ById(id);
+
+        if (${element}.isEmpty()) {
+            return "${element}/error";
+        } else {
+            uiModel.addAttribute("${element}", ${element}.get());
+            return "${element}/edit";
+        }
+    }
+
+    @PutMapping()
+    public String update${entity.name}(@ModelAttribute ${entity.name} ${element}, Model uiModel) {
+
+        ${entity.name} ${element} = ${element}Service.save${entity.name}(${element});
+        
+        uiModel.addAttribute("messaggio", "${entity.name} aggiornato con successo");
+
+        return "confermaAggiornamento"; // Mostra la pagina di conferma
     }
 
     /**
@@ -104,59 +134,30 @@ public class ${entity.name}Controller {
     @ResponseBody
     public byte[] downloadContent(@PathVariable("id") Long id) {
            
-        Optional<Document> document = documentService.getDocumentById(id);
+        Optional<${entity.name}> ${element} = ${element}Service.get${entity.name}ById(id);
 
-        return document.get().getContent();
+        return ${element}.get().getContent();
     }
 
     /**
-     * Recupera un documento e rimanda al form per l'aggiornamento
-     *
-     * @return pagina edit
-     */
-    @GetMapping(value = "/{id}", params = "form")
-    public String updateForm(@PathVariable("id") Long id,
-                             @RequestParam(required = true) String form,
-                             Model uiModel) {
-
-        Optional<Document> document = documentService.getDocumentById(id);
-
-        if (document.isEmpty()) {
-            return "document/error";
-        } else {
-            uiModel.addAttribute("document", document.get());
-            return "document/edit";
-        }
-    }
-
-    @PutMapping()
-    public String updateDocument(@ModelAttribute Document document, Model uiModel) {
-
-        documentService.saveDocument(document);
-        uiModel.addAttribute("messaggio", "Documento aggiornato con successo");
-
-        return "confermaAggiornamento"; // Mostra la pagina di conferma
-    }
-
-    /**
-     * Rimanda al form per creare un nuovo documento
+     * Crea elemento empty e rimanda al form per definire gli attributi
      *
      * @return pagina edit
      */
     @GetMapping(params = "form")
-    public String createForm(@RequestParam(required = true) String form,
-                             Model uiModel) {
+    public String createForm${entity.name}(@RequestParam(required = true) String form, Model uiModel) {
 
-        Document document = new Document();
-        uiModel.addAttribute("document", document);
+        ${entity.name} ${element} = new ${entity.name}();
 
-        return "document/edit";
+        uiModel.addAttribute("${element}", ${element});
+
+        return "${element}/edit";
     }
 
     /**
-     * Rende persistente un nuovo documento
+     * Rende persistente un nuovo elemento
      *
-     * @param Document
+     * @param ${entity.name}
      * @param bindingResult
      * @param uiModel
      * @param httpServletRequest
@@ -167,24 +168,27 @@ public class ${entity.name}Controller {
      * @return nome vista
      */
     @PostMapping()
-    public String createDocument(@Valid Document document,
-                                 BindingResult bindingResult,
-                                 Model uiModel,
-                                 HttpServletRequest httpServletRequest,
-                                 RedirectAttributes redirectAttributes,
-                                 Locale locale,
-                                 @RequestParam(value = "file", required = false) Part file) {
+    public String create${entity.name}(@Valid ${entity.name} ${element},
+                                       @RequestParam(value = "file", required = false) Part file,
+                                       BindingResult bindingResult,
+                                       Model uiModel,
+                                       HttpServletRequest httpServletRequest,
+                                       RedirectAttributes redirectAttributes,
+                                       Locale locale) {
 
-        log.info("Creating Document");
+        log.info("Creating ${entity.name}");
+
         if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("document.save.fail", new Object[]{}, locale)));
-            uiModel.addAttribute("document", document);
-            return "document/edit";
+            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("${element}.save.fail", new Object[]{}, locale)));
+            uiModel.addAttribute("${element}", ${element});
+            return "${element}/edit";
         }
-        uiModel.asMap().clear();
-        redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("document.save.success", new Object[]{}, locale)));
 
-        log.info("Document id: " + document.getId());
+        //
+        uiModel.asMap().clear();
+        redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("${element}.save.success", new Object[]{}, locale)));
+
+        log.info("${entity.name} id: " + ${element}.getId());
 
         // Process upload file
         if (file != null) {
@@ -194,61 +198,28 @@ public class ${entity.name}Controller {
             byte[] fileContent = null;
             try {
                 InputStream inputStream = file.getInputStream();
-                if (inputStream == null)
+                if(inputStream == null)
                     log.info("File inputstream is null");
                 // fileContent = IOUtils.toByteArray(inputStream);
-                document.setContent(fileContent);
+                ${element}.setContent(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
             }
-            document.setContent(fileContent);
+            ${element}.setContent(fileContent);
         }
 
-        documentService.saveDocument(document);
-        String url = "redirect:/document/" + UrlUtil.encodeUrlPathSegment(document.getId().toString(), httpServletRequest);
+        ${entity.name} ${element} = ${element}Service.save${entity.name}(${element});
+        
+        String url = "redirect:/${element}/" + UrlUtil.encodeUrlPathSegment(${element}.getId().toString(), httpServletRequest);
 
         return url;
     }
 
-    /**
-     * Gestisce l'arrivo di un form con i campi editati
-     *
-     * @param Document
-     * @param bindingResult
-     * @param uiModel
-     * @param httpServletRequest
-     * @param redirectAttributes
-     * @param locale
-     *
-     * @return vista
-     */
-    @PostMapping(value = "/{id}", params = "form")
-    public String update(@Valid Document document,
-                         BindingResult bindingResult,
-                         Model uiModel,
-                         HttpServletRequest httpServletRequest,
-                         RedirectAttributes redirectAttributes,
-                         Locale locale,
-                         @RequestParam(value = "file", required = false) Part file) {
+    @Delete
+    public void delete${entity.name}(@PathVariable("id") Long id) {
 
-        log.info("Updating Document");
-
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("Document.save.fail", new Object[]{}, locale)));
-            uiModel.addAttribute("Document", document);
-
-            return "document/edit";
-        }
-
-        uiModel.asMap().clear();
-        redirectAttributes.addFlashAttribute("message",
-                                             new Message("success", messageSource.getMessage("Document.save.success",
-                                                                                             new Object[]{}, locale)));
-        // rende persistenti le modifiche
-        documentService.saveDocument(document);
-
-        String url = "redirect:/document/" + document.getId();
-
-        return url;
-	}
+        ${entity.name} ${element} = ${element}Service.get${entity.name}ById(id).orElseThrow(() -> new ResourceNotFoundException("${entity.name} not found"));
+        
+        ${element}Service.delete${entity.name}(id);
+    }
 }
