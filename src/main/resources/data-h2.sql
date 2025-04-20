@@ -1,10 +1,11 @@
 INSERT INTO document(
+      title,
       summary,
       filename,
       author,
       speaker,
       documentyear,
-      content
+      content,
 )
 VALUES('thesis', 'Impiego di tecniche di ottimizzazione topologica nel processo di design', '',                                'tesi_Airoldi',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Airoldi.pdf')),
       ('thesis', 'Generic Topology Optimization Based on Local State Features', '',                                            'tesi_Aulig',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Aulig.pdf')),

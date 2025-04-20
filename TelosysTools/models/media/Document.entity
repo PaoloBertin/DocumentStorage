@@ -5,6 +5,8 @@ Document {
  
     id : long {@Id};
 
+    title : string;
+
     summary : string;
 
     filename : string;

@@ -16,6 +16,8 @@ import eu.opensource.model.Document;
 @Repository 
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 
+    Page<Document> findByTitle(String title, Pageable pageable);
+
     Page<Document> findBySummary(String summary, Pageable pageable);
 
     Page<Document> findByFilename(String filename, Pageable pageable);

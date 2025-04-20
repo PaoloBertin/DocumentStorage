@@ -86,6 +86,7 @@ public class DocumentController {
             Map<String, String> document = new HashMap<>();
             Document object = entity.get();
             document.put("id", String.valueOf(object.getId()));
+            document.put("title", String.valueOf(object.getTitle()));
             document.put("summary", String.valueOf(object.getSummary()));
             document.put("filename", String.valueOf(object.getFilename()));
             document.put("author", String.valueOf(object.getAuthor()));
