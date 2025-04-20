@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head  th:fragment="head">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.7.2/css/all.min.css}"/>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css}"/>
+        <script type="text/javascript" src="/webjars/popper/2.11.17/dist/umd/popper.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+
+        <link rel="shortcut icon" href="#">
+
+        <!-- script
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        -->
+
+        <title>Application</title>
+    </head>
+    <body>
+        
+    </body>
+</html>

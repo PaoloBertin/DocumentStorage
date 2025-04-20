@@ -1,6 +1,4 @@
 
-
-
 package eu.opensource.services.impl;
 
 import java.util.Optional;
@@ -54,9 +52,7 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-    public void deleteById(Long id) {
-
-		log.info("Deleting Document with id: {}", id);
+    public void delete(Long id) {
 
 		documentRepository.deleteById(id);
 		

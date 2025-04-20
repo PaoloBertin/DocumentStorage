@@ -1,0 +1,15 @@
+#parse("include/init_var_entity.vm")
+DROP TABLE IF EXISTS ${element};
+
+CREATE TABLE IF NOT EXISTS ${element}(
+    $entity.keyAttribute.name BIGINT NOT NULL AUTO_INCREMENT,
+#foreach( $attribute in $entity.nonKeyAttributes )
+#if($attribute.hasTag("array"))
+#else
+    $attribute.sqlColumnName $attribute.sqlColumnType,
+#end
+#end
+
+    PRIMARY KEY($entity.keyAttribute.name)
+);
+

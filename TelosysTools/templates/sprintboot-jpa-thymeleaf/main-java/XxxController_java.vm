@@ -1,12 +1,12 @@
 #parse("include/init_var_entity.vm")
-
 package ${ROOT_PKG}.web.controller;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Locale;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
+import java.util.HashMap;
 
 import eu.opensource.web.controller.util.*;
 
@@ -17,17 +17,14 @@ import jakarta.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +36,7 @@ import ${ROOT_PKG}.model.*;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping(value = "/${entity.name}", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/${element}", produces = MediaType.APPLICATION_JSON_VALUE)
 @Controller
 public class ${entity.name}Controller {
 
@@ -57,9 +54,9 @@ public class ${entity.name}Controller {
      * @return nome vista
      */
     @GetMapping("/all")
-    public String list{entity.name}(@RequestParam(name = "page", defaultValue = "0") int page,
-                                   		@RequestParam(name = "size", defaultValue = "10") int size,
-                                   		Model uiModel) {
+    public String list${entity.name}(@RequestParam(name = "page", defaultValue = "0") int page,
+                                   	@RequestParam(name = "size", defaultValue = "10") int size,
+                                   	Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -84,10 +81,17 @@ public class ${entity.name}Controller {
     @GetMapping(value = "/{id}")
     public String show${entity.name}(@PathVariable("id") Long id, Model uiModel) {
 
-        Optional<${entity.name}> ${element} = ${element}Service.get${entity.name}ById(id);
+        Optional<${entity.name}> entity = ${element}Service.get${entity.name}ById(id);
 
-        if (${element}.isPresent()) {
-            uiModel.addAttribute("${element}", ${element}.get());
+        if (entity.isPresent()) {
+            Map<String, String> document = new HashMap<>();
+            Document object = entity.get();
+#foreach(${attribute} in ${entity.attributes})            
+            ${element}.put("${attribute.name}", String.valueOf(object.get${fn.capitalize(${attribute.name})}()));
+#end
+
+            uiModel.addAttribute("${element}", ${element});
+
             return "${element}/show${entity.name}";
         } else {
             return "${element}/error";
@@ -104,7 +108,7 @@ public class ${entity.name}Controller {
                                            @RequestParam(required = true) String form,
                                            Model uiModel) {
 
-        Optional<${entity.name}> ${element} = ${element}Service.get${element}ById(id);
+        Optional<${entity.name}> ${element} = ${element}Service.get${entity.name}ById(id);
 
         if (${element}.isEmpty()) {
             return "${element}/error";
@@ -117,7 +121,7 @@ public class ${entity.name}Controller {
     @PutMapping()
     public String update${entity.name}(@ModelAttribute ${entity.name} ${element}, Model uiModel) {
 
-        ${entity.name} ${element} = ${element}Service.save${entity.name}(${element});
+        ${element} = ${element}Service.save${entity.name}(${element});
         
         uiModel.addAttribute("messaggio", "${entity.name} aggiornato con successo");
 
@@ -208,18 +212,16 @@ public class ${entity.name}Controller {
             ${element}.setContent(fileContent);
         }
 
-        ${entity.name} ${element} = ${element}Service.save${entity.name}(${element});
+        ${element} = ${element}Service.save${entity.name}(${element});
         
         String url = "redirect:/${element}/" + UrlUtil.encodeUrlPathSegment(${element}.getId().toString(), httpServletRequest);
 
         return url;
     }
 
-    @Delete
+    @DeleteMapping
     public void delete${entity.name}(@PathVariable("id") Long id) {
-
-        ${entity.name} ${element} = ${element}Service.get${entity.name}ById(id).orElseThrow(() -> new ResourceNotFoundException("${entity.name} not found"));
         
-        ${element}Service.delete${entity.name}(id);
+        ${element}Service.delete(id);
     }
 }

@@ -23,5 +23,5 @@ public interface DocumentService {
        
     Document saveDocument(Document document);
 
-    void deleteById(Long id);
+    void delete(Long id);
 }

@@ -31,7 +31,7 @@ public class ${entity.name} implements Serializable {
     private byte[]     $attribute.name;
 
 #else
-    private $attribute.formattedType(10) $attribute.name #if($attribute.hasInitialValue())= ${attribute.ini} #end;
+    private $attribute.formattedType(10) $attribute.name #if($attribute.hasInitialValue())=${attribute.ini} #end;
     
 #end
 #end

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Document Storage</title>
+    </head>
+
+    <body>
+        <div th:fragment="left_side" style="align-content: left; margin-left: 5px;">
+            <p>Filtri</p>
+            <br/>
+            <form name="editFilter" method="post" th:object="${filterItems}" th:action="@{/filter}">
+
+                <div class="form-group">
+                    <label for="title" th:text="#{label.filter.title}">Titolo:</label>
+                    <input class="form-control" id="title"  type="text" th:field="*{title}" th:placeholder="${filterItems.title}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="author" th:text="#{label.filter.author}">Autore:</label>
+                    <input class="form-control" id="author"  type="text" th:field="*{author}" th:placeholder="${filterItems.author}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="speaker" th:text="#{label.filter.speaker}">Relatore:</label>
+                    <input class="form-control" id="speaker"  type="text" th:field="*{speaker}" th:placeholder="${filterItems.speaker}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="year" th:text="#{label.filter.year}">Anno:</label>
+                    <input class="form-control" id="year" type="number" th:field="*{year}" th:placeholder="${filterItems.year}"/>
+                </div>
+
+                <br/>
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+            </form>
+        </div>
+    </body>
+</html>

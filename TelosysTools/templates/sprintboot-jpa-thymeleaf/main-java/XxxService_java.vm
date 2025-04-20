@@ -23,5 +23,5 @@ public interface ${entity.name}Service {
        
     ${entity.name} save${entity.name}(${entity.name} $fn.uncapitalize($entity.name));
 
-    void deleteById(Long id);
+    void delete(Long id);
 }

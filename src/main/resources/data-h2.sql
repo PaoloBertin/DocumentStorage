@@ -1,0 +1,31 @@
+INSERT INTO document(
+      summary,
+      filename,
+      author,
+      speaker,
+      documentyear,
+      content
+)
+VALUES('thesis', 'Impiego di tecniche di ottimizzazione topologica nel processo di design', '',                                'tesi_Airoldi',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Airoldi.pdf')),
+      ('thesis', 'Generic Topology Optimization Based on Local State Features', '',                                            'tesi_Aulig',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Aulig.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Barbieri',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_Barbieri.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Boccini',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Boccini.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Briganti',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_Briganti.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Browne',       '', '', 2020, FILE_READ('classpath:static/documents/tesi_Browne.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Caivano',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Caivano.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Cattoni',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Cattoni.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Chapman',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Chapman.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Desai',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Desai.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_DiFlorio',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_DiFlorio.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Ferraro',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Ferraro.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Ferro',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Ferro.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Fuggini',      '', '', 2020, FILE_READ('classpath:static/documents/tesi_Fuggini.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Jiang',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Jiang.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Kharaghanian', '', '', 2020, FILE_READ('classpath:static/documents/tesi_Kharaghanian.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Khoza',        '', '', 2020, FILE_READ('classpath:static/documents/tesi_Khoza.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Lang',         '', '', 2020, FILE_READ('classpath:static/documents/tesi_Lang.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Manfredi',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_Manfredi.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Maritano',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_Maritano.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Massafra',     '', '', 2020, FILE_READ('classpath:static/documents/tesi_Massafra.pdf')),
+      ('thesis', 'Methods and tools for Topology Optimization systems integration within the Product Development Process', '', 'tesi_Meisam',       '', '', 2020, FILE_READ('classpath:static/documents/tesi_Meisam.pdf'))
+;

@@ -53,9 +53,7 @@ public class ${entity.name}ServiceImpl implements ${entity.name}Service {
 	}
 
 	@Override
-    public void deleteById(Long id) {
-
-		log.info("Deleting ${entity.name} with id: {}", id);
+    public void delete(Long id) {
 
 		${fn.uncapitalize(${entity.name})}Repository.deleteById(id);
 		

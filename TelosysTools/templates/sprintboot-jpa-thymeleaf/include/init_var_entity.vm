@@ -1,12 +1,10 @@
 #set($jpaEntityClass    = "${entity.name}" )
 #set($element           = "${fn.uncapitalize(${entity.name})}" )
-
 #if ( $entity.hasCompositePrimaryKey() )
 #set($jpaEntityIdClass  = "${entity.name}Id" )
 #else
 #set($jpaEntityIdClass  = $entity.keyAttribute.wrapperType )
 #end
-
 #set($dtoClass        = "${entity.name}DTO" )
 #set($repositoryClass = "${entity.name}Repository" )
 #set($serviceClass    = "${entity.name}Service" )
